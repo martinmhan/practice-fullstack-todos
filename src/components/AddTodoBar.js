@@ -8,11 +8,23 @@ class AddTodoBar extends React.Component {
     };
   }
 
+  updateText = (event) => {
+    let newText = event.target.value;
+    this.setState({
+      text: newText
+    });
+  }
+
+  addTodoHelper = (event) => {
+    event.preventDefault();
+    this.props.addTodo(this.state.text);
+  }
+
   render() {
     return (
       <div>
-        <form action="">
-          <input type="text"></input>
+        <form action="" onSubmit={this.addTodoHelper}>
+          <input type="text" onChange={this.updateText}></input>
           <button type="submit">Add Todo</button>
         </form>
       </div>

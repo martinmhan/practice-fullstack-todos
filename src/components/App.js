@@ -6,14 +6,24 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: ['walk the dog', 'do the laundry', 'brush my teeth']
+      todos: ['walk the dog', 'cook dinner']
     };
+  }
+
+  addTodo = (todo) => {
+    this.setState({
+      todos: [todo, ...this.state.todos]
+    });
+  }
+
+  deleteTodo = (todo) => {
+    let todos = this.state.todos.splice().splice.bind.
   }
 
   render() {
     return (
       <div>
-        <AddTodoBar />
+        <AddTodoBar addTodo={this.addTodo}/>
         <TodoList todos={this.state.todos}/>
       </div>
     );
