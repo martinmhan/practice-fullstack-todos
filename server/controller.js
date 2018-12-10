@@ -6,6 +6,7 @@ const controller = {
     console.log('GET request received');
     todolist.findAll()
       .then(data => {
+        console.log('GET request successful');
         res.status(200).send(data);
       })
       .catch(err => {
@@ -18,6 +19,7 @@ const controller = {
     let todo = req.body.todo;
     todolist.create({ todo, completed: false })
       .then(data => {
+        console.log('POST request successful');
         res.status(201).send('POST request successful');
       })
       .catch(err => {
@@ -29,12 +31,13 @@ const controller = {
     console.log('PUT request received');
     let id = req.body.todoId;
     let newTodo = req.body.newTodo;
-    let newCompleted = req.body.completed;
+    let newCompleted = req.body.newCompleted;
     todolist.update(
       { todo: newTodo, completed: newCompleted },
       {where: { id }}
     )
       .then(() => {
+        console.log('PUT request successful');
         res.status(202).send('PUT request successful');
       })
       .catch(err => {
@@ -49,6 +52,7 @@ const controller = {
       {where: { id }}
     )
       .then(() => {
+        console.log('DELETE request successful');
         res.status(200).send('DELETE request successful');
       })
       .catch(err => {

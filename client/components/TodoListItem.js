@@ -3,57 +3,20 @@ const React = require('react');
 const TodoListItem = (props) => {
   return (
     <li>
-      {props.todo.todo}
-      <button onClick={() => {this.props.crud.dbPostTodo()}}>Toggle Completed</button>
-      <button onClick={}>Delete Todo</button>
-      <button onClick={}>Update Todo</button>
+      { props.todo.completed ? <del>{props.todo.todo}</del> : <span>{props.todo.todo}</span> }
+      <button onClick={ () => {props.updateTodo(props.todo.index, props.todo.id, props.todo.todo, !props.todo.completed);} }>
+        Toggle Completed
+      </button>
+
+      <button onClick={ () => {props.deleteTodo(props.todo.index, props.todo.id);} }>
+        Delete Todo
+      </button>
+
+      <button onClick={ () => {props.updateTodo(props.todo.index, props.todo.id, prompt('Enter your updated todo'), props.todo.completed);} }>
+        Update Todo
+      </button>
     </li>
   );
 };
 
 module.exports = TodoListItem;
-
-// class TodoListItem extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       completed: false
-//     }
-//   }
-
-//   componentDidMount() {
-//     this.setState({
-//       completed: this.props.todo.completed
-//     });
-//   }
-
-//   toggleCompleted = () => {
-//     this.setState({
-//       completed: !this.state.completed
-//     });
-//     this.props.crud.dbPutTodo(
-//       this.props.todo.id,
-//       this.props.todo.todo,
-//       this.state.completed
-//     );
-//   }
-
-//   updateTodo = () => {
-//     this.props.crud.dbPutTodo(
-//       this.props.todo.id,
-      
-//     )
-//   }
-
-//   render() {
-//     return(
-//       <li>
-//         {props.todo.todo}
-//         <button onClick={ () => {this.toggleCompleted(this.props.todo.id)} }>Toggle Completed</button>
-//         <button>Delete Todo</button>
-//         <button>Update Todo</button>
-//       </li>
-//     );
-//   }
-// };
-

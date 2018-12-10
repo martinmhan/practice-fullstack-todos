@@ -1,4 +1,4 @@
-// const React = require('react');
+const React = require('react');
 
 class AddTodoBar extends React.Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class AddTodoBar extends React.Component {
     this.setState({ text });
   }
 
-  addTodo = (event) => {
+  addTodoHelper = (event) => {
     event.preventDefault();
     this.props.addTodo(this.state.text);
     document.getElementById('addTodoInput').value = '';
@@ -22,7 +22,7 @@ class AddTodoBar extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.addTodo}>
+        <form onSubmit={this.addTodoHelper}>
           <input type="text" id="addTodoInput" onChange={this.updateText}></input>
           <input type="submit" value="Add Todo"></input>
         </form>
