@@ -1,31 +1,16 @@
-const mysql = require('mysql');
+const sequelize = require('sequelize');
 
-const dbConnection = mysql.createConnection({
-  user: 'root',
-  password: '',
-  database: 'todos'
+const connection = new sequelize('todos', 'root', '', {
+  host: 'localhost',
+  dialect: 'mysql'
 });
 
-dbConnection.connect((err) => {
-  if (err) {
-    console.log('Error connecting to SQL database: ', err);
-  } else {
-    let query = `
-      CREATE TABLE IF NOT EXISTS todolist (
-        id int(11) primary key auto_increment,
-        todo varchar(255),
-        completed boolean
-      );
-    `;
+connection.sync({force: false}) // establish connection, 
+  .then(() => {
+    console.log('Successfully connected to mysql DB');
+  })
+  .catch((err) => {
+    console.log('Error connecting to mysql DB: ', err);
+  });
 
-    dbConnection.query(query, (err) => {
-      if (err) {
-        console.log('Error creating todolist table: ', err);
-      } else {
-        console.log('Successfully created todolist table.');
-      }
-    });
-  }
-});
-
-module.exports = dbConnection;
+module.exports = connection;
