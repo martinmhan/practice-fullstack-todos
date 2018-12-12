@@ -2,12 +2,14 @@ const controller = require('./controller.js');
 const router = require('express').Router();
 
 
-router.get('/todos', controller.get);
+router
+  .route('/')
+  .get(controller.get)
+  .post(controller.post)
+  .put(controller.put);
 
-router.post('/', controller.post);
-
-router.put('/', controller.put);
-
-router.delete('/', controller.delete);
+router
+  .route('/:todoId')
+  .delete(controller.delete);
 
 module.exports = router;

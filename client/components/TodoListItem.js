@@ -3,9 +3,21 @@ const React = require('react');
 const TodoListItem = (props) => {
   return (
     <li>
-      {props.todo}
-      <button onClick={() => { props.deleteTodo(props.index)} }>Delete Todo</button>
-      <button onClick={() => { props.updateTodo(props.index, prompt('Please enter your updated todo.'))} }>Update Todo</button>
+      {props.completed ? <del>{props.todo}</del> : <span>{props.todo}</span>}
+      <button onClick={() => { props.deleteTodo(props.todoId) } }>Delete me!</button>
+      <button onClick={() => {
+        props.updateTodo(
+          props.todoId,
+          {todo: prompt('Please enter your updated todo.'), completed: props.completed}
+        )
+      }}>Update me!</button>
+      
+      <button onClick={() => {
+        props.updateTodo(
+          props.todoId,
+          {todo:props.todo, completed:!props.completed}
+        )
+      }}>Complete me!</button>
     </li>
   );
 }

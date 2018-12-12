@@ -14,7 +14,7 @@ class AddTodoBar extends React.Component {
   }
 
   addTodoHelper = (event) => {
-    if (event) { event.preventDefault(); }
+    event.preventDefault();
     document.getElementById('addTodoInput').value = '';
     this.props.addTodo(this.state.text);
   }

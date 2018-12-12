@@ -1,8 +1,10 @@
 const db = require('../database/index.js');
+const dbHelpers = require('./dbHelpers');
 
 module.exports = {
   get: (req, res) => {
-    db.query('SELECT* from todolist_rawsql', (err, data) => {
+    console.log('GET request received in controller');
+    dbHelpers.get((err, data) => {
       if (err) {
         console.log('GET error: ', err);
       } else {
@@ -12,9 +14,9 @@ module.exports = {
     });
   },
   post: (req, res) => {
-    console.log('received POST request from client');
-    let newTodo = req.body.todo;
-    db.query('INSERT INTO todolist_rawsql (SELECT NULL, ?, false);', newTodo, (err) => {
+    console.log('POST request received in controller');
+    let { newTodo } = req.body;
+    dbHelpers.post(newTodo, (err) => {
       if (err) {
         console.log('POST error : ', err);
       } else {
@@ -24,9 +26,9 @@ module.exports = {
     });
   },
   put: (req, res) => {
-    let oldTodo = req.body.oldTodo;
-    let newTodo = req.body.newTodo;
-    db.query(`UPDATE todolist_rawsql SET todo = "${newTodo}" WHERE todo = "${oldTodo}" LIMIT 1`, (err) => {
+    console.log('PUT request received in controller');
+    let { todoId, newTodo } = req.body;
+    dbHelpers.put(todoId, newTodo, (err) => {
       if (err) {
         console.log('PUT error: ', err);
       } else {
@@ -36,8 +38,9 @@ module.exports = {
     });
   },
   delete: (req, res) => {
-    let todo = req.body.todo;
-    db.query(`DELETE FROM todolist_rawsql WHERE todo = "${todo}" LIMIT 1`, (err) => {
+    console.log('DELETE request received in controller');
+    let { todoId } = req.params;
+    dbHelpers.delete(todoId, (err) => {
       if (err) {
         console.log('DELETE error: ', err);
       } else {

@@ -5,8 +5,8 @@ const TodoList = (props) => {
   return (
     <div>
       <ul>
-        {props.todos.map((todo, i) => (
-          <TodoListItem todo={todo} index={i} key={todo.id} deleteTodo={props.deleteTodo} updateTodo={props.updateTodo}/>
+        {props.todos.map(({ todo, id, completed }) => (
+          <TodoListItem todo={todo} todoId={id} completed={completed} deleteTodo={props.deleteTodo} updateTodo={props.updateTodo}/>
         ))}
       </ul>
     </div>

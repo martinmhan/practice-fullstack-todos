@@ -1,6 +1,7 @@
 const React = require('react');
 const TodoList = require('./Todolist');
 const AddTodoBar = require('./AddTodoBar');
+const axios = require('axios');
 
 class App extends React.Component {
   constructor(props) {
@@ -11,33 +12,29 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.props.crud.dbGetTodos()
-      .then(data => {
-        let todos = data.map(todo => todo.todo);
-        this.setState({ todos });
+    this.getTodos();
+  }
+
+  getTodos = () => {
+    axios.get('/api')
+      .then(({data}) => {
+        this.setState({ todos: data });
       });
   }
 
-  addTodo = (todo) => {
-    let todos = [todo, ...this.state.todos];
-    this.setState({ todos });
-    this.props.crud.dbAddTodo(todo);
+  addTodo = (newTodo) => {
+    axios.post('/api', { newTodo })
+      .then(this.getTodos);
   }
 
-  deleteTodo = (index) => {
-    let todos = [...this.state.todos];
-    let todo = this.state.todos[index];
-    todos.splice(index, 1);
-    this.setState({ todos });
-    this.props.crud.dbDeleteTodo(todo);
+  updateTodo = (todoId, newTodo) => {
+    axios.put('/api', { todoId, newTodo })
+      .then(this.getTodos);
   }
 
-  updateTodo = (index, newTodo) => {
-    let todos = [...this.state.todos];
-    let oldTodo = this.state.todos[index];
-    todos.splice(index, 1, newTodo);
-    this.setState({ todos });
-    this.props.crud.dbUpdateTodo(oldTodo, newTodo);
+  deleteTodo = (todoId) => {
+    axios.delete(`/api/${todoId}`)
+      .then(this.getTodos);
   }
 
   render() {
