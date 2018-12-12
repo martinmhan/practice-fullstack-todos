@@ -2,10 +2,8 @@ const dbHelpers = require('../database/dbHelpers.js');
 
 module.exports = {
   get: (req, res) => {
-    console.log('controller get');
     dbHelpers.getAllTodos()
       .then((data) => {
-        console.log('GET request successful');
         res.status(201).send(data);
       })
       .catch(err => {
@@ -13,36 +11,29 @@ module.exports = {
       });
   },
   post: (req, res) => {
-    console.log('controller post');
-    let newTodo = req.body;
-    dbHelpers.addTodo(newTodo, (err) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.status(200).send('POST request successful!');
-        console.log('POST request sucessful');
-      }
-    });
+    let { newTodo } = req.body;
+    dbHelpers.addTodo(newTodo)
+      .then(() => {
+        res.status(200).send('POST successful');
+      })
+      .catch(err => console.log(err));
   },
   put: (req, res) => {
-    console.log('controller put');
-    let todoId = req.body.todoId;
-    let newTodo = req.body.newTodo;
+    let { todoId } = req.body;
+    let { newTodo } = req.body;
     dbHelpers.updateTodo(todoId, newTodo)
       .then(() => {
-        console.log('PUT request successful')
+        res.status(200).send('PUT successful');
       })
       .catch((err) => {
         console.log(err);
       });
   },
   delete: (req, res) => {
-    console.log('controller delete');
     let { todoId } = req.params;
     dbHelpers.deleteTodo(todoId)
       .then(() => {
-        console.log('DELETE request successful');
-        res.status(200).send();
+        res.status(200).send('DELETE successful');
       })
       .catch((err) => {
         console.log(err);

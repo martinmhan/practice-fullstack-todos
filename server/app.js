@@ -9,6 +9,6 @@ app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, '../client')));
-app.use(router);
+app.use('/api',router);
 
 module.exports = app;

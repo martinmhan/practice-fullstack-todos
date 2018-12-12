@@ -5,10 +5,9 @@ const List = (props) => {
   return (
     <div>
       <ul>
-        List
-        <ListItem />
-        <ListItem />
-        <ListItem />
+        {props.list.map((item, i) => (
+          <ListItem item={item} index={i} key={i} updateTodo={props.updateTodo} deleteTodo={props.deleteTodo}/>  
+        ))}
       </ul>
     </div>
   )

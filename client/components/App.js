@@ -17,41 +17,46 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log('App componentDidMount');
     this.getAllTodos();
   }
 
   getAllTodos() {
-    console.log('getAllTodos');
-    axios.get('https://127.0.0.1:3000')
+    axios.get('/api')
       .then(({ data }) => {
-        console.log('got todos');
-        console.log(data);
         this.setState({
           list: data
         });
       })
   }
 
-  addTodo(todo) {
-    console.log('addTodo');
+  addTodo(newTodo) {
+    axios.post(
+      '/api',
+      { newTodo }
+    )
+      .then(this.getAllTodos);
   }
 
-  updateTodo() {
-    console.log('updateTodo');
+  updateTodo(todoId, newTodo) {
+    axios.put(
+      '/api',
+      { todoId, newTodo }
+    )
+      .then(this.getAllTodos);
   }
   
-  deleteTodo() {
-    console.log('deleteTodo');
+  deleteTodo(todoId) {
+    axios.delete(
+      `/api/${todoId}`
+    )
+      .then(this.getAllTodos);
   }
 
   render() {
-    console.log('rendering App');
     return (
       <div>
-        App Component
-        <AddTodoBar />
-        <List />
+        <AddTodoBar addTodo={this.addTodo}/>
+        <List list={this.state.list} updateTodo={this.updateTodo} deleteTodo={this.deleteTodo}/>
       </div>
     );
   }
