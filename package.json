@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/martinmhan/practice-fullstack-todos#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "express": "^4.16.4",
     "mongodb": "^3.1.10",
     "mongoose": "^5.3.16",
@@ -34,7 +35,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "6.24.1",
-    "webpack": "2.6.1",
-    "nodemon": "^1.18.8"
+    "nodemon": "^1.18.8",
+    "webpack": "2.6.1"
   }
 }
