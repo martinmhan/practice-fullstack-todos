@@ -1,4 +1,3 @@
-const sequelize = require('sequelize');
 const todolist = require('../database/model.js');
 
 const controller = {
@@ -16,7 +15,7 @@ const controller = {
   },
   post: (req, res) => {
     console.log('POST request received');
-    let todo = req.body.todo;
+    let { todo } = req.body;
     todolist.create({ todo, completed: false })
       .then(data => {
         console.log('POST request successful');
@@ -29,12 +28,10 @@ const controller = {
   },
   put: (req, res) => {
     console.log('PUT request received');
-    let id = req.body.todoId;
-    let newTodo = req.body.newTodo;
-    let newCompleted = req.body.newCompleted;
+    let { todoId, newTodo, newCompleted } = req.body;
     todolist.update(
       { todo: newTodo, completed: newCompleted },
-      {where: { id }}
+      { where: { id: todoId } }
     )
       .then(() => {
         console.log('PUT request successful');
@@ -47,9 +44,9 @@ const controller = {
   },
   delete: (req, res) => {
     console.log('DELETE request received');
-    let id = req.body.todoId;
+    let { todoId } = req.params;
     todolist.destroy(
-      {where: { id }}
+      {where: { id: todoId }}
     )
       .then(() => {
         console.log('DELETE request successful');
