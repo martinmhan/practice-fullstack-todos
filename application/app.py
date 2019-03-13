@@ -19,7 +19,6 @@ def get_todos():
 
 @app.route('/todos', methods=['POST'])
 def add_todo():
-  print(request)
   incoming = request.get_json()
   new_todo_text = incoming['todo']
   ins = todos.insert().values(todo=new_todo_text) # creates a string - SQL insert query
@@ -28,8 +27,18 @@ def add_todo():
 
 @app.route('/todos/<todo>', methods=['DELETE'])
 def delete_todo(todo):
-  conn.execute(f"DELETE FROM todos WHERE todo = '{todo}';")
+  d = todos.delete().where(todos.c.todo==todo)
+  conn.execute(d)
   return'Todo successfully deted!'
+
+@app.route('/todos', methods=['PUT'])
+def update_todo():
+  incoming = request.get_json()
+  old_todo = incoming['oldTodo']
+  new_todo = incoming['newTodo']
+  upd = todos.update().where(todos.c.todo==old_todo).values(todo=new_todo)
+  conn.execute(upd)
+  return 'Todo successfully updated!'
 
 if __name__ == '__main__':
   print('Running app.py')

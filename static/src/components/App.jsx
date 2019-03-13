@@ -46,6 +46,16 @@ class App extends Component {
     }
   };
 
+  updateTodo = async (oldTodo, newTodo) => {
+    console.log('updateTodo');
+    try {
+      await Axios.put('http://localhost:5000/todos', { oldTodo, newTodo });
+      this.getTodos();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   handleTextInput = (e) => {
     console.log('handleTextInput');
     try {
@@ -62,7 +72,11 @@ class App extends Component {
     <div id="app">
       App
       <TodoInput handleTextInput={this.handleTextInput} addTodo={this.addTodo} />
-      <TodoList todos={this.state.todos} deleteTodo={this.deleteTodo} />
+      <TodoList
+        todos={this.state.todos}
+        deleteTodo={this.deleteTodo}
+        updateTodo={this.updateTodo}
+      />
     </div>
   );
 }
