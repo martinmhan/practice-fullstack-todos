@@ -36,10 +36,10 @@ class App extends Component {
     }
   }
 
-  deleteTodo = async (i) => {
+  deleteTodo = async (todo) => {
     console.log('deleteTodo');
     try {
-      await Axios.delete('http://localhost:5000/todos', { index: i });
+      await Axios.delete(`http://localhost:5000/todos/${todo}`, { todo });
       this.getTodos();
     } catch (err) {
       console.error(err);
@@ -62,7 +62,7 @@ class App extends Component {
     <div id="app">
       App
       <TodoInput handleTextInput={this.handleTextInput} addTodo={this.addTodo} />
-      <TodoList todos={this.state.todos} />
+      <TodoList todos={this.state.todos} deleteTodo={this.deleteTodo} />
     </div>
   );
 }

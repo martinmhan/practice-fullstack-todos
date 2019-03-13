@@ -1,4 +1,25 @@
-Initialize virtual environment with
+# Setup
+1. Create static bundle
 ```
-virtualenv -p python3 flask-app-env
+npm run build:dev
+```
+2. Create virtual environment
+```
+npm run create-venv
+```
+3. Activate virtual environment
+```
+source env/bin/activate
+```
+4. Setup environment variables
+```
+npm run setup
+```
+5. Initiate app
+```
+npm start
+```
+6. Deactivate virtual environment when done
+```
+deactivate
 ```

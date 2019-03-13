@@ -25,7 +25,7 @@ def _deactivate(args):
 _deactivate(["nondestructive"])
 aliases["deactivate"] = _deactivate
 
-$VIRTUAL_ENV = r"/Users/martinhan/Desktop/test-react-flask-app/env"
+$VIRTUAL_ENV = r"/Users/martinhan/Desktop/practice-fullstack-todos/env"
 
 $_OLD_VIRTUAL_PATH = $PATH
 $PATH = $PATH[:]

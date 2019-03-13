@@ -1,4 +1,4 @@
-#!/Users/martinhan/Desktop/test-react-flask-app/env/bin/python
+#!/Users/martinhan/Desktop/practice-fullstack-todos/env/bin/python
 
 import sys
 import getopt

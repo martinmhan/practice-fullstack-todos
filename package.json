@@ -7,8 +7,9 @@
     "test": "jest --detectOpenHandles",
     "build:dev": "webpack -w --env.NODE_ENV=development --progress",
     "build:prod": "webpack --env.NODE_ENV=production",
-    "start:dev": "nodemon server/index.js",
-    "start": "node server/index.js"
+    "create-venv": "virtualenv -p python3 env",
+    "setup": "python3 settings.py",
+    "start": "python3 application/app.py"
   },
   "keywords": [],
   "author": "",
