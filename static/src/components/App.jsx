@@ -26,6 +26,26 @@ class App extends Component {
     }
   };
 
+  addTodo = async () => {
+    console.log('addTodo: ', this.state.todo);
+    try {
+      await Axios.post('http://localhost:5000/todos', { todo: this.state.todo });
+      this.getTodos();
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  deleteTodo = async (i) => {
+    console.log('deleteTodo');
+    try {
+      await Axios.delete('http://localhost:5000/todos', { index: i });
+      this.getTodos();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   handleTextInput = (e) => {
     console.log('handleTextInput');
     try {
@@ -37,15 +57,6 @@ class App extends Component {
     }
   };
 
-  addTodo = async () => {
-    console.log('addTodo: ', this.state.todo);
-    try {
-      await Axios.post('http://localhost:5000/todos', { todo: this.state.todo });
-      this.getTodos();
-    } catch (err) {
-      console.error(err);
-    }
-  }
 
   render = () => (
     <div id="app">

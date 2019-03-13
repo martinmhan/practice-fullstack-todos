@@ -1,7 +1,11 @@
-from index import db
+from sqlalchemy import create_engine, Table, Column, Integer, String, MetaData, ForeignKey
 
-class Todo(db.Model):
-  id = db.Column(db.Integer, primary_key=True)
-  todo = db.Column(db.String(80), unique=True, nullable=False)
+engine = create_engine('postgresql://martinhan@localhost:5432/todos', echo=True)
+metadata = MetaData()
 
-db.create_all()
+todos = Table('todos', metadata,
+  Column('id', Integer, primary_key=True),
+  Column('todo', String)
+)
+
+metadata.create_all(engine)
