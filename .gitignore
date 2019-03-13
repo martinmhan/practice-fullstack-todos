@@ -62,3 +62,6 @@ typings/
 
 # virtual environment
 env/
+
+# Static bundle
+bundle.js
