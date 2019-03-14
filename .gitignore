@@ -67,5 +67,5 @@ env/
 bundle.js
 
 # cache
-__pycache/
+__pycache__/
 .vscode
