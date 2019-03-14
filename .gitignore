@@ -63,5 +63,9 @@ typings/
 # virtual environment
 env/
 
-# Static bundle
+# static bundle
 bundle.js
+
+# cache
+__pycache/
+.vscode
