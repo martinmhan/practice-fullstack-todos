@@ -1,5 +1,9 @@
 # Setup
-1. Create virtual environment
+1. Install node modules
+```
+npm install 
+```
+2. Create virtual environment
 ```
 npm run create-venv
 ```
@@ -7,7 +11,11 @@ npm run create-venv
 ```
 source env/bin/activate
 ```
-3. Setup environment variables
+3. Install python dependencies
+```
+pip install -r requirements.txt
+```
+4. Setup environment variables
 ```
 npm run setup
 ```
