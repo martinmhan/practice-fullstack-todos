@@ -7,27 +7,27 @@ npm install
 ```
 npm run create-venv
 ```
-2. Activate virtual environment
+3. Activate virtual environment
 ```
 source env/bin/activate
 ```
-3. Install python dependencies
+4. Install python dependencies
 ```
 pip install -r requirements.txt
 ```
-4. Setup environment variables
+5. Setup environment variables
 ```
 npm run setup
 ```
-4. Create static bundle
+6. Create static bundle
 ```
 npm run build:dev
 ```
-5. Initiate app
+7. Initiate app
 ```
 npm start
 ```
-6. Deactivate virtual environment when done
+8. Deactivate virtual environment when done
 ```
 deactivate
 ```
