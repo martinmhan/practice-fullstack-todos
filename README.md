@@ -4,4 +4,4 @@ Practice repo where I build todo lists with new tech that I've learned. Todo lis
 # Tech used
   - Front end: React, React-Native
   - Web framework: Express, Flask
-  - DBMS: MongoDB/Mongoose, MySQL (w/ and w/o Sequelize), PostgreSQL, Firebase (Cloud Firestore)
+  - DBMS: MongoDB/Mongoose, MySQL, PostgreSQL, Sequelize, Firebase (Cloud Firestore)
