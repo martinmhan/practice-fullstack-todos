@@ -6,6 +6,7 @@ import {
   Content,
   Body,
   Title,
+  Spinner,
 } from 'native-base';
 
 import TodoList from '../../components/TodoList';
@@ -20,6 +21,7 @@ export default class TodoListScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
       isDialogVisible: false,
       email: '',
       todos: [],
@@ -29,7 +31,8 @@ export default class TodoListScreen extends Component {
   componentDidMount = async () => {
     const email = this.props.navigation.getParam('email');
     await this.setState({ email });
-    this.getTodos();
+    await this.getTodos();
+    this.setState({ loading: false });
   };
 
   getTodos = async () => {
@@ -94,23 +97,27 @@ export default class TodoListScreen extends Component {
             <Title>Todo List</Title>
           </Body>
         </Header>
-        <Content>
-          <TodoList
-            todos={this.state.todos}
-            toggleCompleted={this.toggleCompleted}
-          />
-          <AddTodoButton
-            displayDialog={() => { this.setState({ isDialogVisible: true }); }}
-          />
-          <DialogInput
-            isDialogVisible={this.state.isDialogVisible}
-            title="Add Todo"
-            message="Enter a new Todo!"
-            hintInput="Your new Todo"
-            submitInput={(textInput) => { this.addTodo(textInput); }}
-            closeDialog={this.closeDialog}
-          />
-        </Content>
+        {
+          this.state.loading
+          ? <Spinner style={{flex: 1, justifyContent: 'center', alignItems: 'center'}} />
+          : <Content>
+              <TodoList
+                todos={this.state.todos}
+                toggleCompleted={this.toggleCompleted}
+              />
+              <AddTodoButton
+                displayDialog={() => { this.setState({ isDialogVisible: true }); }}
+              />
+              <DialogInput
+                isDialogVisible={this.state.isDialogVisible}
+                title="Add Todo"
+                message="Enter a new Todo!"
+                hintInput="Your new Todo"
+                submitInput={(textInput) => { this.addTodo(textInput); }}
+                closeDialog={this.closeDialog}
+              />
+            </Content>
+        }
       </Container>
     );
   }
