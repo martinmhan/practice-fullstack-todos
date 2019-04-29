@@ -115,6 +115,7 @@ export default class TodoListScreen extends Component {
                 hintInput="Your new Todo"
                 submitInput={(textInput) => { this.addTodo(textInput); }}
                 closeDialog={this.closeDialog}
+                // dialogStyle={{  }}
               />
             </Content>
         }
